@@ -1,16 +1,34 @@
 let map;
 
-function initialize() {
-  let center = new google.maps.LatLng(19.4326077, -99.13320799999997);
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: center,
-    zoom: 13
-  });
+navigator.geolocation.getCurrentPosition(function(position) {
+   let pos = {
+     lat: position.coords.latitude,
+     lng: position.coords.longitude
+   };
+   let positionUser =  Object.values(pos);
+  let latitude = positionUser[0];
+  let longitude = positionUser[1];
+  initialize(latitude,longitude)
+
+  })
+   
+
+
+function initialize(lati,longi) {
+ 
+ console.log(longi)
+ let  pyrmont = new google.maps.LatLng(lati,longi);
+
+ map = new google.maps.Map(document.getElementById('map'), {
+   center: pyrmont,
+   zoom: 15
+ });
+
 
 
 let request = {
   location : center,
-  radius: 9000,
+  radius: 500,
   types: ['restautant']
 
 }
